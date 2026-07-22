@@ -1,0 +1,10 @@
+Pais,Zona,Costo_Base_USD,Tiempo_Entrega_Dias,Cargo_Adicional_USD
+Mexico,Norte,10,3-5,0
+Mexico,Centro,10,2-4,2
+Mexico,Sur,12,4-6,3
+Colombia,Bogota,15,4-6,0
+Colombia,Regiones,18,5-8,4
+Chile,Santiago,15,3-5,0
+Chile,Regiones,20,5-7,5
+Peru,Lima,12,3-5,0
+Peru,Regiones,16,4-7,3

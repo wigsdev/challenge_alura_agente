@@ -1,0 +1,14 @@
+[
+  {
+    "pregunta": "¿Qué métodos de pago son aceptados en BimBam Buy?",
+    "respuesta": "Aceptamos tarjetas de crédito y débito Visa, MasterCard y American Express. También admitimos pagos mediante PayPal y transferencias electrónicas SPEI en México."
+  },
+  {
+    "pregunta": "¿Cómo puedo rastrear mi pedido?",
+    "respuesta": "Una vez confirmado el envío, recibirás un correo electrónico con un número de guía y un enlace de rastreo. Podrás realizar el seguimiento directamente en la plataforma digital."
+  },
+  {
+    "pregunta": "¿Puedo cambiar la dirección de envío después de realizar la compra?",
+    "respuesta": "La dirección de envío solo puede modificarse si el pedido no ha sido procesado por el centro de distribución (generalmente dentro de las primeras 2 horas posteriores al pago)."
+  }
+]

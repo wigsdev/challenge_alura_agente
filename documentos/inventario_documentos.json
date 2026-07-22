@@ -1,0 +1,74 @@
+[
+  {
+    "archivo": "politica_reembolsos.pdf",
+    "formato": "PDF",
+    "categoria": "atencion_cliente",
+    "responsable": "Departamento de Devoluciones",
+    "version": "1.2",
+    "estado": "vigente"
+  },
+  {
+    "archivo": "programa_afiliados.pdf",
+    "formato": "PDF",
+    "categoria": "marketing",
+    "responsable": "Área de Growth Marketing",
+    "version": "2.0",
+    "estado": "vigente"
+  },
+  {
+    "archivo": "guia_envios.pdf",
+    "formato": "PDF",
+    "categoria": "logistica",
+    "responsable": "Centro de Logística y Despacho",
+    "version": "1.5",
+    "estado": "vigente"
+  },
+  {
+    "archivo": "faq_pagos.pdf",
+    "formato": "PDF",
+    "categoria": "finanzas",
+    "responsable": "Departamento de Tesorería y Pagos",
+    "version": "1.0",
+    "estado": "vigente"
+  },
+  {
+    "archivo": "manual_garantia.pdf",
+    "formato": "PDF",
+    "categoria": "atencion_cliente",
+    "responsable": "Control de Calidad y Garantías",
+    "version": "1.1",
+    "estado": "vigente"
+  },
+  {
+    "archivo": "politica_privacidad.md",
+    "formato": "Markdown",
+    "categoria": "legal",
+    "responsable": "Área Jurídica y Compliance",
+    "version": "3.4",
+    "estado": "vigente"
+  },
+  {
+    "archivo": "tarifas_envio_adicionales.csv",
+    "formato": "CSV",
+    "categoria": "logistica",
+    "responsable": "Centro de Logística y Despacho",
+    "version": "2.1",
+    "estado": "vigente"
+  },
+  {
+    "archivo": "faq_adicional.json",
+    "formato": "JSON",
+    "categoria": "atencion_cliente",
+    "responsable": "Departamento de Atención al Cliente",
+    "version": "1.0",
+    "estado": "vigente"
+  },
+  {
+    "archivo": "manual_soporte_ti.html",
+    "formato": "HTML",
+    "categoria": "soporte_tecnico",
+    "responsable": "Infraestructura y Soporte Interno",
+    "version": "1.0",
+    "estado": "vigente"
+  }
+]
