@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Integration / Environment Secrets
+.env
+.env.local
+.streamlit/secrets.toml
+
+# Databases / Vector stores
+chroma_db/
+faiss_index/
+*.db
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Notebooks and logs
+.ipynb_checkpoints/
+*.log
