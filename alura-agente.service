@@ -1,0 +1,17 @@
+[Unit]
+Description=Servicio Streamlit para Alura Agente BimBam Buy
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/challenge_alura_agente
+ExecStart=/home/ubuntu/.local/bin/streamlit run app.py --server.port=8501 --server.address=0.0.0.0
+Restart=on-failure
+RestartSec=5s
+
+# Carga variables de entorno para que las credenciales de Gemini estén accesibles
+EnvironmentFile=/home/ubuntu/challenge_alura_agente/.env
+
+[Install]
+WantedBy=multi-user.target
