@@ -137,12 +137,28 @@ if prompt := st.chat_input("¿En qué puedo ayudarte hoy? (ej. plazos de devoluc
     # Generar la respuesta del asistente mediante el agente ReAct
     with st.chat_message("assistant"):
         with st.spinner("Buscando en manuales corporativos..."):
-            try:
-                # Invocar al agente pasándole la consulta
-                result = st.session_state.agent_executor.invoke({"input": prompt})
-                output_text = result["output"]
-            except Exception as e:
-                output_text = f"Ocurrió un error al procesar tu consulta: {e}"
+            import time
+            retries = 3
+            success_query = False
+            output_text = ""
+            while retries > 0 and not success_query:
+                try:
+                    # Invocar al agente pasándole la consulta
+                    result = st.session_state.agent_executor.invoke({"input": prompt})
+                    output_text = result["output"]
+                    success_query = True
+                except Exception as e:
+                    error_msg = str(e)
+                    if "429" in error_msg or "RESOURCE_EXHAUSTED" in error_msg:
+                        st.warning(f"Límite de cuota API excedido. Reintentando en 15 segundos... (Intentos restantes: {retries - 1})")
+                        time.sleep(15)
+                        retries -= 1
+                    else:
+                        output_text = f"Ocurrió un error al procesar tu consulta: {e}"
+                        break
+            
+            if not success_query and not output_text:
+                output_text = "Lo siento, la API de Gemini está temporalmente saturada (Límite de cuota de solicitudes diarias/minuto excedido). Por favor, reintenta tu pregunta en unos segundos."
                 
             st.markdown(output_text)
             
