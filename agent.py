@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain_core.tools import tool
 from langchain_classic.agents import create_react_agent, AgentExecutor
 from langchain_classic.memory import ConversationBufferMemory
@@ -101,7 +101,7 @@ Final Answer: tu respuesta final y detallada, formateada de manera premium e inc
 Historial de conversación:
 {chat_history}
 
-Pregunta del colaborador: {input}
+Question: {input}
 Thought: {agent_scratchpad}"""
 
 prompt = PromptTemplate(
@@ -111,11 +111,10 @@ prompt = PromptTemplate(
 
 def get_agent_executor():
     # Instanciar el modelo LLM oficial para el Challenge (gemini-2.5-flash)
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-flash-latest",
-        temperature=0.0,  # Temperatura baja para evitar alucinaciones
-        max_output_tokens=1000,
-        max_retries=12  # Reintentos automáticos para evitar fallos por cuota (429)
+    llm = ChatGroq(
+        model="llama-3.3-70b-versatile",
+        temperature=0.0,
+        max_retries=12
     )
 
     # Configurar memoria conversacional para mantener contexto del chat

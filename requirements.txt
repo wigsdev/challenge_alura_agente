@@ -5,6 +5,7 @@ langchain>=0.1.0
 langchain-text-splitters>=0.0.1
 langchain-community>=0.0.1
 langchain-google-genai>=1.0.0
+langchain-groq>=0.1.0
 faiss-cpu>=1.7.4
 
 # Procesamiento y Extracción de Contenido (HU 02)
