@@ -110,3 +110,57 @@ Para permitir que la aplicación funcione de manera estable con la API gratuita 
 Si deseas realizar el despliegue directo dentro de una máquina virtual (Compute Instance) de Linux en OCI, hemos dejado en la raíz los archivos de configuración listos para producción:
 * **`Dockerfile`:** Para contenerizar la aplicación con Docker en OCI.
 * **`alura-agente.service`:** Archivo de servicio Systemd para mantener el servicio activo e iniciarse automáticamente con el sistema operativo de la máquina virtual.
+
+---
+
+## 💬 Ejemplos de Preguntas y Respuestas (QA)
+
+A continuación se muestran ejemplos reales de interacciones con el asistente, demostrando su capacidad multi-formato y su comportamiento ante consultas fuera de contexto:
+
+### 1. 📄 Consulta sobre Políticas de Devolución (Fuente: PDF)
+* **Pregunta:** `¿Cuál es el plazo para solicitar retracto de compra?`
+* **Respuesta:** 
+  > El plazo para que un cliente solicite una devolución por **retracto de compra** es de **10 días corridos** posteriores a la recepción del pedido, siempre y cuando el producto cumpla con los requisitos de elegibilidad correspondientes.
+  > 
+  > Para cualquier duda o seguimiento adicional sobre este trámite, puedes ponerte en contacto con el **Departamento de Devoluciones**:
+  > - **Correo electrónico:** `devoluciones@bimbambuy.com`
+  > - **Extensión:** 201
+  > 
+  > **Fuentes consultadas:**
+  > - **Archivo:** `politica_reembolsos.pdf` (Página 4)
+  > - **Categoría:** atencion_cliente
+  > - **Responsable:** Departamento de Devoluciones
+
+### 2. 📊 Consulta sobre Tarifas de Envío (Fuente: CSV estructurado)
+* **Pregunta:** `¿Cuál es el costo de envío base y el cargo adicional para la Zona Centro de México?`
+* **Respuesta:**
+  > Con base en las tarifas oficiales de BimBam Buy para **México (MX)**:
+  > - El **costo de envío base** para la **Zona Centro** es de **$150.00 MXN**.
+  > - El **cargo adicional** aplicable es de **$25.00 MXN**.
+  > 
+  > Si requieres soporte logístico o tienes dudas sobre coberturas adicionales, puedes contactar al **Centro de Logística y Despacho**:
+  > - **Correo electrónico:** `logistica@bimbambuy.com`
+  > - **Extensión:** 301
+  > 
+  > **Fuentes consultadas:**
+  > - **Archivo:** `tarifas_envio_adicionales.csv` (Línea 2)
+  > - **Categoría:** logistica
+  > - **Responsable:** Centro de Logística y Despacho
+
+### 3. 🚫 Consulta Fuera de Contexto (Mitigación de Alucinaciones - Fallback)
+* **Pregunta:** `¿Cómo puedo solicitar mis días de vacaciones pendientes y en qué sistema debo registrarlos?`
+* **Respuesta:**
+  > Lo siento, no he encontrado información sobre políticas de vacaciones o registro de días libres en los manuales organizacionales de BimBam Buy disponibles. 
+  > 
+  > Para consultas sobre Recursos Humanos y beneficios para colaboradores, por favor ponte en contacto con el área de **Administración / TI**:
+  > - **Correo electrónico:** `soporte_ti@bimbambuy.com`
+  > - **Extensión:** 101
+
+---
+
+## 📸 Evidencia de Ejecución en Producción
+
+### Aplicación Activa en Streamlit Cloud (OCI Data Ingestion)
+La siguiente captura de pantalla muestra la interfaz interactiva de chat desplegada en la nube y respondiendo consultas de forma exitosa usando la base de conocimiento cargada en OCI:
+
+![Asistente BimBam Buy en Streamlit Cloud](app_screenshot.png)
