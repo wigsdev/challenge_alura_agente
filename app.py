@@ -57,6 +57,25 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# Verificación y autoconstrucción de base vectorial en la nube si no existe (Self-healing RAG)
+try:
+    from vector_db import VectorDatabaseManager
+    db_manager = VectorDatabaseManager()
+    if not os.path.exists(db_manager.index_path):
+        doc_dir = os.path.join(db_manager.base_dir, "documentos", "bimbam_buy")
+        if not os.path.exists(doc_dir) or len(os.listdir(doc_dir)) < 9:
+            with st.spinner("Descargando corpus de documentos desde OCI Object Storage..."):
+                import subprocess
+                import sys
+                script_path = os.path.join(db_manager.base_dir, "scripts", "descargar_docs.py")
+                subprocess.run([sys.executable, script_path], check=True)
+        
+        with st.spinner("Construyendo índice vectorial semántico... (Esto se realiza una única vez al iniciar)"):
+            db_manager.build_and_save_index()
+        st.toast("¡Base de datos RAG inicializada con éxito!", icon="🟢")
+except Exception as e:
+    st.error(f"Error crítico de inicialización RAG: {e}. Verifica que las credenciales GEMINI_API_KEY y GOOGLE_API_KEY estén cargadas en los Secrets de Streamlit.")
+
 # Inicializar historial de conversación y ejecutor del agente en el estado de sesión
 if "messages" not in st.session_state:
     st.session_state.messages = []
