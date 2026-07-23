@@ -158,7 +158,7 @@ if prompt := st.chat_input("¿En qué puedo ayudarte hoy? (ej. plazos de devoluc
                         break
             
             if not success_query and not output_text:
-                output_text = "Lo siento, la API de Groq/LLM está temporalmente saturada (Límite de cuota de solicitudes diaria/minuto excedido). Por favor, reintenta tu pregunta en unos segundos."
+                output_text = "Lo siento, la API del agente está temporalmente saturada (Límite de cuota de solicitudes excedido). Por favor, reintenta tu pregunta en unos segundos."
             st.markdown(output_text)
             
             # Guardar la respuesta en el estado de sesión

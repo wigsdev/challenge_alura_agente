@@ -14,6 +14,7 @@ class VectorDatabaseManager:
         
         # Inicializar el modelo oficial de embeddings recomendado para el Challenge
         self.embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
+        self.db = None  # Cache de base de datos vectorial en memoria
 
     def build_and_save_index(self):
         print("Iniciando la construcción del índice vectorial...")
@@ -67,6 +68,7 @@ class VectorDatabaseManager:
         # 3. Guardar el índice localmente en disco
         if db:
             db.save_local(self.index_path)
+            self.db = None  # Invalidar caché en memoria para forzar recarga
             print(f"Índice vectorial guardado exitosamente en: {self.index_path}")
             return True
         return False
@@ -79,7 +81,8 @@ class VectorDatabaseManager:
         return FAISS.load_local(self.index_path, self.embeddings, allow_dangerous_deserialization=True)
 
     def search(self, query, k=3, category_filter=None):
-        db = self.load_vector_store()
+        if self.db is None:
+            self.db = self.load_vector_store()
         
         # Configurar filtros por metadatos (HU 03 / HU 04)
         filter_dict = {}
@@ -89,7 +92,7 @@ class VectorDatabaseManager:
         print(f"Ejecutando búsqueda semántica para: '{query}' | Filtro de categoría: {category_filter}...")
         
         # Búsqueda con similitud de coseno
-        results = db.similarity_search(query, k=k, filter=filter_dict if filter_dict else None)
+        results = self.db.similarity_search(query, k=k, filter=filter_dict if filter_dict else None)
         return results
 
 if __name__ == "__main__":
