@@ -30,7 +30,7 @@ def buscar_documentos_corporativos(query: str) -> str:
     """Busca en la base de conocimiento de BimBam Buy información sobre devoluciones, reembolsos,
     tarifas de envío, tiempos de entrega, métodos de pago, garantías de productos, privacidad y soporte técnico de TI."""
     try:
-        results = db_manager.search(query, k=4)
+        results = db_manager.search(query, k=2)
         if not results:
             return "No se encontraron documentos relevantes en la base de datos."
         
@@ -112,7 +112,7 @@ prompt = PromptTemplate(
 def get_agent_executor():
     # Instanciar el modelo LLM oficial para el Challenge (gemini-2.5-flash)
     llm = ChatGroq(
-        model="llama-3.3-70b-versatile",
+        model="qwen/qwen3.6-27b",
         temperature=0.0,
         max_retries=12
     )
