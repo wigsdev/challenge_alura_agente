@@ -16,7 +16,6 @@ env/
 
 # Databases / Vector stores
 chroma_db/
-faiss_index/
 *.db
 
 # Operating System files
