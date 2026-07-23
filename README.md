@@ -1,5 +1,15 @@
 # Challenge Alura Agente - Asistente Corporativo de IA (RAG)
 
+![Version](https://img.shields.io/badge/Version-1.0.0-blue?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Production-success?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.30.0-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
+![LangChain](https://img.shields.io/badge/LangChain-0.1.0-1C3C3A?style=flat-square&logo=chainlink&logoColor=white)
+![Groq LPU](https://img.shields.io/badge/Groq_LPU-Qwen_3.6-Orange?style=flat-square&logo=lightning&logoColor=white)
+![Oracle Cloud](https://img.shields.io/badge/Oracle_Cloud-OCI-F80000?style=flat-square&logo=oracle&logoColor=white)
+![FAISS](https://img.shields.io/badge/FAISS-Vector_Store-blueviolet?style=flat-square&logo=databricks&logoColor=white)
+
+
 Este repositorio contiene la implementación del **Challenge Alura Agente**, un asistente inteligente corporativo diseñado para responder consultas de los colaboradores a partir de múltiples formatos de documentos organizacionales (PDF, CSV, JSON, Markdown, HTML). 
 
 La solución está construida bajo una arquitectura de **Generación Aumentada por Recuperación (RAG)** con control de estado y orquestada para su despliegue en la nube de **Oracle Cloud Infrastructure (OCI)**.
