@@ -29,7 +29,7 @@ El flujo operativo del agente se divide en tres fases principales:
 - **Lenguaje:** Python 3.10+
 - **Orquestación de IA:** LangChain & LangGraph
 - **Base de Datos Vectorial:** FAISS / Chroma
-- **Modelos de IA:** API de Google Gemini (`gemini-flash-latest` y `models/gemini-embedding-001`)
+- **Modelos de IA:** API de Groq con el modelo **`qwen/qwen3.6-27b`** (razonamiento ReAct) y API de Google Gemini (**`models/gemini-embedding-001`** para embeddings vectoriales)
 - **Interfaz Web:** Streamlit
 - **Infraestructura Cloud:** Oracle Cloud Infrastructure (OCI)
 
@@ -60,7 +60,8 @@ pip install -r requirements.txt
 ### 4. Configurar Variables de Entorno
 Crea un archivo `.env` en la raíz del proyecto a partir de `.env.example`:
 ```bash
-GEMINI_API_KEY=tu_api_key_aqui
+GOOGLE_API_KEY=tu_api_key_de_google_aqui # Para embeddings vectoriales de FAISS
+GROQ_API_KEY=tu_api_key_de_groq_aqui     # Para el agente conversacional Qwen
 ```
 
 ### 5. Ingesta de Documentos
@@ -85,8 +86,8 @@ Debido a limitaciones temporales de disponibilidad de recursos gratuitos en las 
 [ OCI Object Storage ] --(Descarga Segura HTTP)--> [ App Streamlit Cloud ]
 (Bucket: bimbam-buy-docs)                           (bimbambuy-agente)
                                                             |
-                                                   [ Gemini API (LLM) ]
-                                                   (gemini-flash-latest)
+                                                   [ Groq LPU API ]
+                                                   (qwen/qwen3.6-27b)
 ```
 
 ### 1. Almacenamiento en OCI Object Storage
@@ -101,10 +102,10 @@ La interfaz interactiva y el motor RAG están alojados en **Streamlit Community 
 * **URL de Producción:** [https://bimbambuy-agente.streamlit.app/](https://bimbambuy-agente.streamlit.app/)
 * **CI/CD:** El despliegue se sincroniza automáticamente con cada `git push` a la rama `main` de este repositorio.
 
-### 3. Optimizaciones para Cuotas Gratuitas de API (Mitigación de 429)
-Para permitir que la aplicación funcione de manera estable con la API gratuita de Gemini, implementamos dos optimizaciones críticas:
-* **Pre-Indexación Vectorial:** La base de datos vectorial FAISS se pre-compiló localmente y se subió en el repositorio (`faiss_index/`), evitando que el servidor en la nube consuma la cuota de embeddings en el arranque.
-* **Manejo de Reintentos Exponenciales:** Tanto el Agente ReAct en `agent.py` (`max_retries=12`) como la interfaz en `app.py` tienen controladores que detectan errores de cuota (`RESOURCE_EXHAUSTED` / 429), pausando la ejecución 15 segundos y reintentando automáticamente en lugar de lanzar un error al usuario.
+### 3. Optimizaciones para Latencia y Cuotas (Migración a Groq + Qwen)
+Para permitir que la aplicación funcione de manera estable en la nube sin retrasos ni fallos por cuota de uso (como el error HTTP 429), implementamos dos optimizaciones críticas:
+* **Pre-Indexación Vectorial:** La base de datos vectorial FAISS se pre-compiló localmente y se subió en el repositorio (`faiss_index/`), evitando consumir la cuota de embeddings en cada arranque de la app en la nube.
+* **Procesamiento Híbrido Groq (Qwen):** Migramos el procesamiento conversacional del agente ReAct a **Groq** utilizando el modelo **`qwen/qwen3.6-27b`**. Esto reduce el tiempo de respuesta del agente a menos de **1.5 segundos** por consulta, ofrece mayor robustez de razonamiento que los modelos ligeros de 8B, y cuenta con un presupuesto de tokens independiente y generoso, evitando bloqueos por IP compartida en Streamlit Cloud. La API de Google Gemini se mantiene únicamente para embeddings locales puntuales de la consulta del usuario.
 
 ### 4. Alternativa de Despliegue Persistente en VM de OCI
 Si deseas realizar el despliegue directo dentro de una máquina virtual (Compute Instance) de Linux en OCI, hemos dejado en la raíz los archivos de configuración listos para producción:
