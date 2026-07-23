@@ -112,9 +112,10 @@ prompt = PromptTemplate(
 def get_agent_executor():
     # Instanciar el modelo LLM oficial para el Challenge (gemini-2.5-flash)
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",
+        model="gemini-flash-latest",
         temperature=0.0,  # Temperatura baja para evitar alucinaciones
-        max_output_tokens=1000
+        max_output_tokens=1000,
+        max_retries=12  # Reintentos automáticos para evitar fallos por cuota (429)
     )
 
     # Configurar memoria conversacional para mantener contexto del chat
